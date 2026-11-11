@@ -8,6 +8,7 @@ import { filterHref } from '@/lib/filters';
 import { PHONE } from '@/lib/site';
 import { useUi } from '@/lib/ui';
 import { Icon } from '@/components/ui/Icon';
+import { LogoMark } from '@/components/ui/LogoMark';
 
 export function MobileDrawer() {
   const t = useTranslations();
@@ -32,7 +33,7 @@ export function MobileDrawer() {
       <div className="drawer-scrim" onClick={close} />
       <div className="drawer-panel" role="dialog" aria-modal="true" aria-label={t('drawer.label')}>
         <div className="drawer-head">
-          <span className="logo logo--dark"><span className="logo-mark"><Icon name="bolt" /></span>FIX</span>
+          <span className="logo logo--dark"><LogoMark size={44} /><span className="sr-only">FIX</span></span>
           <button ref={closeRef} type="button" className="drawer-close" aria-label={t('drawer.close')} onClick={close}>
             <Icon name="x" />
           </button>

@@ -5,7 +5,7 @@ import { getAllProducts } from '@/lib/catalog';
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ['', ...getAllProducts().map((p) => `/product/${p.slug}`)];
+  const paths = ['', '/products', ...getAllProducts().map((p) => `/product/${p.slug}`)];
   return paths.flatMap((path) =>
     routing.locales.map((locale) => ({
       url: `${SITE}/${locale}${path}`,

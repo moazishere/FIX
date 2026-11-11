@@ -4,6 +4,7 @@ import { CATEGORY_IDS } from '@/lib/catalog';
 import { filterHref } from '@/lib/filters';
 import { PHONE } from '@/lib/site';
 import { Icon } from '@/components/ui/Icon';
+import { LogoMark } from '@/components/ui/LogoMark';
 import { NoteLink } from '@/components/ui/NoteLink';
 import { NewsletterBand } from './NewsletterBand';
 
@@ -27,7 +28,7 @@ export function Footer() {
         <div className="container footer-grid">
           <div className="footer-brand">
             <Link className="logo logo--dark" href="/" aria-label={t('header.home')}>
-              <span className="logo-mark"><Icon name="bolt" /></span>FIX
+              <LogoMark size={56} />
             </Link>
             <p className="body">{t('footer.about')}</p>
             <p className="caption">

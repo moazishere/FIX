@@ -88,18 +88,19 @@
     "next": "Next slide",
     "choose": "Choose slide",
     "show": "Show slide {n}",
-    "s1Title": "Black Friday Deals Start Early",
-    "s1Body": "Save up to 30% on headphones, laptops and wearables until November 27.",
-    "s1Cta": "Shop Deals",
-    "s1Alt": "Black wireless headphones on a yellow background",
-    "s2Title": "Thin, Light, All-Day Laptops",
-    "s2Body": "The new Aero 14 weighs 1.2 kg and runs 18 hours on a single charge.",
-    "s2Cta": "Shop Laptops",
-    "s2Alt": "Silver ultrabook laptop, half open",
-    "s3Title": "Capture Every Moment Sharper",
-    "s3Body": "Mirrorless cameras and 4K drones, now with a free 64 GB card.",
-    "s3Cta": "Explore Cameras",
-    "s3Alt": "Two mirrorless cameras with lenses under neon light"
+    "s1Title": "<nb>iPhone 18 Pro</nb> and <nb>Pro Max</nb>",
+    "s1Body": "A20 Pro chip, a 48MP variable-aperture camera and a new burgundy finish.",
+    "s1Cta": "Shop phones",
+    "s1Alt": "Burgundy iPhone 18 Pro seen from the back, showing its three-lens camera",
+    "s2Title": "Meet <nb>iPhone Duo</nb>",
+    "s2Body": "Apple's first foldable, with a 7.6-inch inner display and a titanium body.",
+    "s2Cta": "Shop phones",
+    "s2Alt": "iPhone Duo folded in one hand, beside the unfolded screen playing a video",
+    "s3Title": "The new <nb>Galaxy S26 Ultra</nb>",
+    "s3Body": "A 6.9-inch display, a built-in Privacy Display and Galaxy AI.",
+    "s3Cta": "Shop phones",
+    "s3Alt": "Galaxy S26 Ultra on a display stand, showing Galaxy AI",
+    "credit": "Photo: <link>{author}</link>, <licenseLink>{license}</licenseLink>. Cropped."
   },
   "benefits": {
     "label": "Why shop with us",
@@ -388,5 +389,11 @@
     "photos": "Product photos",
     "photo": "Photo {n}",
     "stickyAria": "Buy {name}"
+  },
+  "shop": {
+    "viewAll": "View all products",
+    "filterLabel": "Filter by category",
+    "onSale": "On sale",
+    "description": "Browse every FIX product: headphones, laptops, phones, wearables, cameras and gaming. Filter by category and sort by price or rating."
   }
 }

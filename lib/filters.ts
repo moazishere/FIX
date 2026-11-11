@@ -3,7 +3,8 @@ import { getAllProducts, isCategory, type CategoryId, type Product } from './cat
 export const SORTS = ['popular', 'rating', 'new', 'price-asc', 'price-desc'] as const;
 export type Sort = (typeof SORTS)[number];
 
-export const PER_PAGE = 10;
+/** Products per page on /products (four rows of five on desktop). */
+export const PER_PAGE = 20;
 
 export interface Filters {
   category?: CategoryId;
@@ -30,7 +31,7 @@ export function parseFilters(params: RawParams): Filters {
   };
 }
 
-/** Build a shop link (always lands on the product grid). Defaults are left out of the URL. */
+/** Build a link to the All Products page with these filters. Defaults are left out of the URL. */
 export function filterHref(f: Partial<Filters> = {}): string {
   const sp = new URLSearchParams();
   if (f.category) sp.set('cat', f.category);
@@ -39,7 +40,7 @@ export function filterHref(f: Partial<Filters> = {}): string {
   if (f.sort && f.sort !== 'popular') sp.set('sort', f.sort);
   if (f.page && f.page > 1) sp.set('page', String(f.page));
   const qs = sp.toString();
-  return `/${qs ? `?${qs}` : ''}#products`;
+  return `/products${qs ? `?${qs}` : ''}`;
 }
 
 const SORTERS: Record<Sort, (a: Product, b: Product) => number> = {

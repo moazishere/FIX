@@ -18,7 +18,7 @@ canonical/alternate links use your real domain.
 ## Structure
 
 ```
-app/[locale]/            layout (html lang/dir, fonts, header/footer), home, product page
+app/[locale]/            layout (html lang/dir, fonts, header/footer), home, /products, product page
 components/layout/       announcement bar, header (utility bar, search, widgets, nav), drawer, footer
 components/home/         hero, benefits, categories, brands, promos, deals + countdown, rows, trending, reviews, guides
 components/product/      card, grid, sort, pagination, finish picker, wish/share/add-to-cart
@@ -35,7 +35,10 @@ proxy.ts                 locale redirect (Next 16's name for middleware)
 
 - **Server by default.** Pages, product text, grids and prices' structure render on the server; only
   interactive pieces are client components (carousel, countdown, dropdowns, cart, wishlist, gallery…).
-- **Filters live in the URL:** `/en?cat=audio&sort=price-asc&page=2#products`. See `lib/filters.ts`.
+- **All Products page:** `/en/products` — every product, 20 per page, with category chips (counts), an On sale toggle,
+  sort and pagination. Filters live in the URL (`/en/products?cat=audio&sort=price-asc&page=2`), so every view is
+  server-rendered and shareable; header search, nav, category tiles and footer links all land here. See `lib/filters.ts`.
+  The home page only shows a 10-product Best Sellers preview that links to it.
 - **Product pages:** `/en/product/arc-pro-elite-controller-sand` — a full, statically generated page
   (gallery, buy box, specs, delivery & returns, related products, recently viewed). Every product link
   opens it directly; there are no pop-ups. Specs and summaries live in `lib/product-content.ts`.

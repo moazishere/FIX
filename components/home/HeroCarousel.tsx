@@ -1,22 +1,41 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Link } from '@/i18n/navigation';
 import { filterHref } from '@/lib/filters';
 import { HANDBACK, prefersReducedMotion } from '@/lib/motion';
+import { PHOTO_CREDITS, type PhotoCredit } from '@/lib/photo-credits';
+// The iPhone artwork lives in assets/ and is imported, so Next reads its size and serves resized copies.
+import iphone18 from '@/assets/Afmetingen_iPhone_18_Pro_Review.webp';
+import duo from '@/assets/iPhone_Duo_specificaties.webp';
 import { Icon } from '@/components/ui/Icon';
 
 gsap.registerPlugin(useGSAP);
 
-const SLIDES = [
-  { n: 1, image: '/images/hero-1.jpg', href: filterHref({ sale: true }) },
-  { n: 2, image: '/images/hero-2.jpg', href: filterHref({ category: 'computers' }) },
-  { n: 3, image: '/images/hero-3.jpg', href: filterHref({ category: 'cameras' }) },
-] as const;
+interface Slide {
+  n: 1 | 2 | 3;
+  /** A static import (size is known) or a path in /public (then `w`/`h` are required). */
+  src: StaticImageData | string;
+  w?: number;
+  h?: number;
+  /** "wide": landscape artwork on a white background, blended into the page. "portrait": a tall photo, shown whole over a blurred copy. */
+  layout: 'wide' | 'portrait';
+  href: string;
+  /** Focal point when the image is cropped tall on phones, so the product stays in frame. */
+  pos: string;
+  /** Only for third-party Creative-Commons photos (lib/photo-credits.ts). Our own artwork needs none. */
+  credit?: PhotoCredit;
+}
+
+const SLIDES: Slide[] = [
+  { n: 1, src: iphone18, layout: 'wide', href: filterHref({ category: 'phones' }), pos: '50% 50%' },
+  { n: 2, src: duo, layout: 'wide', href: filterHref({ category: 'phones' }), pos: '14% 50%' },
+  { n: 3, src: '/images/hero-s26.jpg', w: 1280, h: 1707, layout: 'portrait', href: filterHref({ category: 'phones' }), pos: '50% 12%', credit: PHOTO_CREDITS.s26 },
+];
 
 const INTERVAL_MS = 6000;
 
@@ -93,19 +112,31 @@ export function HeroCarousel() {
                 inert={i !== current}
               >
                 <div className="slide-copy">
-                  <Heading className="display">{t(`s${s.n}Title`)}</Heading>
+                  <Heading className="display">{t.rich(`s${s.n}Title`, { nb: (chunks) => <span className="nowrap">{chunks}</span> })}</Heading>
                   <p className="body">{t(`s${s.n}Body`)}</p>
                   <Link className="btn btn-primary" href={s.href}>{t(`s${s.n}Cta`)}</Link>
                 </div>
-                <div className="slide-visual">
+                <div
+                  className={`slide-visual slide-visual--${s.layout}`}
+                  style={{ '--pos': s.pos, '--photo': typeof s.src === 'string' ? `url(${s.src})` : undefined } as React.CSSProperties}
+                >
                   <Image
-                    src={s.image}
+                    src={s.src}
                     alt={t(`s${s.n}Alt`)}
-                    width={1400}
-                    height={933}
-                    sizes="(max-width: 768px) 100vw, 60vw"
+                    {...(typeof s.src === 'string' ? { width: s.w, height: s.h } : {})}
+                    sizes={s.layout === 'wide' ? '(max-width: 768px) 100vw, 720px' : '(max-width: 768px) 100vw, 420px'}
                     priority={i === 0}
                   />
+                  {s.credit ? (
+                    <p className="photo-credit">
+                      {t.rich('credit', {
+                        author: s.credit.author,
+                        license: s.credit.license,
+                        link: (chunks) => <a href={s.credit!.source} target="_blank" rel="noopener noreferrer">{chunks}</a>,
+                        licenseLink: (chunks) => <a href={s.credit!.licenseUrl} target="_blank" rel="noopener noreferrer">{chunks}</a>,
+                      })}
+                    </p>
+                  ) : null}
                 </div>
               </article>
             );

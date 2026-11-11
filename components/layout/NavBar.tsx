@@ -34,7 +34,7 @@ export function NavBar() {
             <li><Link className="nav-link" href="/">{t('nav.home')}</Link></li>
             <li>
               <Dropdown triggerClassName="nav-link" trigger={<>{t('nav.shop')}<Icon name="chevron-down" /></>}>
-                <Link className={item} href={filterHref()}>{t('nav.bestSellers')}</Link>
+                <Link className={item} href={filterHref()}>{t('categories.allProducts')}</Link>
                 <Link className={item} href={filterHref({ sort: 'new' })}>{t('nav.newArrivals')}</Link>
                 <Link className={item} href={filterHref({ sort: 'rating' })}>{t('nav.topRated')}</Link>
                 <Link className={item} href={filterHref({ sale: true })}>{t('nav.onSale')}</Link>

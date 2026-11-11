@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { IBM_Plex_Sans_Arabic, Poppins } from 'next/font/google';
@@ -29,6 +29,9 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   variable: '--font-arabic',
   display: 'swap',
 });
+
+// Colours the mobile browser chrome to match the header (--header in globals.css).
+export const viewport: Viewport = { themeColor: '#3F3A34' };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
